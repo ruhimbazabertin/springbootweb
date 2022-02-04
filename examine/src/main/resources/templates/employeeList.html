@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Web app</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <span><a th:href="@{/employeeForm}">Back to EmployeeForm</a></span>
+  <h2>Well come to Employeees' List</h2>
+  <hr/>
+  <div class="table">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.firstname}"></td>
+        <td th:text="${employee.lastname}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td> <a th:href="@{/edit/{id}(id=${employee.id})}">Edit</a></td>
+        <td><a th:href="@{/delete/{id}(id=${employee.id})}">Delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
