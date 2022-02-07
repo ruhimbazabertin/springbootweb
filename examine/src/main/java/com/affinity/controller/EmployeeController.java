@@ -31,7 +31,7 @@ public class EmployeeController {
     @PostMapping("/create")
     public String createEmployee(@ModelAttribute("employee") Employee employee){
             service.create(employee);
-        return "redirect:/employeeList";
+        return "redirect:/employees";
     }
     @GetMapping("/employees")
     public String allEmployees(Model model){
@@ -48,16 +48,22 @@ public class EmployeeController {
         return"employeeUpdateForm";
     }
     @PostMapping("/update/{id}")
-    public String updateEmployee(@PathVariable("id") int id, Model model){
-        Employee employee = new Employee();
+    public String updateEmployee(@ModelAttribute("employee")  Employee employee, @PathVariable("id") int id){
                 employee.setId(id);
                 service.create(employee);
-        return "redirect:/employeeList";
+        return "redirect:/employees";
     }
+    //
     @GetMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable("id") int id, Model model){
-        //Optional<Employee> employee = service.findEmployeeId(id);
+        Optional<Employee> employee = service.findEmployeeId(id);
+        if (employee.isPresent()) {
             service.delete(id);
-        return "redirect:/employeeList";
+        }else{
+            model.addAttribute("error","no emplotyee");
+        }
+          //  service.delete(employee);
+
+        return "redirect:/employees";
     }
 }
