@@ -21,9 +21,9 @@ public class EmployeeService {
     public Optional<Employee> findEmployeeId(int id){
         return repo.findById(id);
     }
-    //public void delete(Employee employee){
-      //  repo.delete(employee);
-   // }
+    public void delete(Employee employee){
+        repo.delete(employee);
+    }
     public void delete(int id){
         repo.deleteById(id);
     }
